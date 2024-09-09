@@ -2,16 +2,23 @@ pipeline {
     agent any
     
     environment{
-        BUILD_FILE_NAME = 'laptop.txt'
     }
 
     stages {
         stage('Build ') {
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
             steps {
-                cleanWs()
-                echo "$BUILD_FILE_NAME"
                 sh '''
-                    mkdir -p build
+                    ls -la
+                    node --version
+                    npm --version
+                    npm ci run build
+                    ls -la
                 '''
             }
         }
