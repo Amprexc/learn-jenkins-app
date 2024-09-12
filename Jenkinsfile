@@ -24,6 +24,10 @@ pipeline {
             steps {
                 sh '''
                     echo 'Test stage'
+                    if ! [ -f /build/index.html ]; then
+                        echo "File index does not exist."
+                    fi
+
                 '''
             }
         }
