@@ -37,11 +37,8 @@ pipeline {
     }
     
     post{
-        success{
-            echo 'Success'
-        }
-        failure{
-            echo 'Failed'
+        always{
+            junit 'test-results/junit.xml'
         }
         
     }
